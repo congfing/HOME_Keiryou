@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>計量ソフト メニュー</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+    background: linear-gradient(160deg, #0f4c91 0%, #1a6eb5 50%, #1e8c6e 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 40px;
+  }
+
+  .logo-wrap {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .logo-icon {
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .logo-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .logo-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+  }
+
+  .cards {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .app-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    transition: transform 0.12s, box-shadow 0.12s;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .app-card:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
+
+  .card-icon {
+    font-size: 46px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .card-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a2e4a;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.55;
+  }
+  .card-arrow {
+    font-size: 22px;
+    color: #ccc;
+    flex-shrink: 0;
+  }
+
+  .card-1 { border-left: 6px solid #1a6eb5; }
+  .card-2 { border-left: 6px solid #22c55e; }
+
+  .card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 6px;
+  }
+  .badge-blue  { background: #eff6ff; color: #1a6eb5; }
+  .badge-green { background: #f0fdf4; color: #16a34a; }
+
+  .footer {
+    margin-top: 44px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="logo-wrap">
+  <div class="logo-icon">🗑️</div>
+  <div class="logo-title">計量ソフト</div>
+  <div class="logo-sub">有上野清掃社</div>
+</div>
+
+<div class="cards">
+
+  <!-- App 1: 計量データ入力 -->
+  <a class="app-card card-1" href="index_3-11.html">
+    <div class="card-icon">📝</div>
+    <div class="card-body">
+      <div class="card-title">計量データ入力</div>
+      <div class="card-desc">物件ごとの計量データを入力し、<br>ExcelやTEXTで保存します。</div>
+      <div class="card-badge badge-blue">index_3-11</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <!-- App 2: 計量メモ テンプレート -->
+  <a class="app-card card-2" href="index_4-2.html">
+    <div class="card-icon">📋</div>
+    <div class="card-body">
+      <div class="card-title">計量メモ テンプレート</div>
+      <div class="card-desc">収集物件と項目をまとめた<br>テンプレートを作成・管理します。</div>
+      <div class="card-badge badge-green">index_4-2</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  タップしてアプリを開く
+</div>
+
+</body>
+</html>
