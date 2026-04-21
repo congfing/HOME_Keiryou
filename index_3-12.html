@@ -54,6 +54,22 @@
   .staff-item.selected .staff-check { display: block; }
   .order-saved-badge { display: inline-block; background: #d1fae5; color: #065f46; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
 
+  /* ===== 曜日別・順番保存パネル ===== */
+  .day-save-panel { background: white; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07); border: 1px solid #e2e8f0; }
+  .day-save-title { font-size: 14px; font-weight: 700; color: #1a6eb5; margin-bottom: 4px; }
+  .day-save-sub { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.4; }
+  .day-save-buttons { display: flex; flex-wrap: nowrap; gap: 5px; }
+  .day-save-btn { flex: 1 1 0; min-width: 0; padding: 9px 2px; border-radius: 8px;
+    border: 2px solid #e2e8f0; background: #f8fafc; font-size: 14px; font-weight: bold;
+    color: #555; cursor: pointer; position: relative; transition: all 0.15s; outline: none;
+    -webkit-tap-highlight-color: transparent; }
+  .day-save-btn:active { transform: scale(0.96); }
+  .day-save-btn.today { border-color: #f59e0b; background: #fffbeb; }
+  .day-save-btn.saved { background: #d1fae5; border-color: #10b981; color: #065f46; }
+  .day-save-btn.saved::after { content: '✓'; position: absolute; top: 0px; right: 3px;
+    font-size: 11px; color: #10b981; font-weight: bold; }
+
   /* ===== COMBINED PROPERTY LIST+SETTINGS ===== */
   .prop-card { background: white; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; border: 2px solid transparent; transition: border-color 0.2s; }
   .prop-card.done { border-color: #22c55e; }
@@ -184,7 +200,7 @@
     </div>
     <div style="height:12px"></div>
     <button class="btn btn-primary" onclick="goToScreen2()">新規入力 →</button>
-    <div style="text-align:center;margin-top:20px;font-size:12px;color:#aaa">index_3-13.html</div>
+    <div style="text-align:center;margin-top:20px;font-size:12px;color:#aaa">index_3-14.html</div>
   </div>
 </div>
 
@@ -209,6 +225,11 @@
     <div class="section-title">🏢 物件リスト<span class="count-badge" id="propCount"></span></div>
     <div class="section-sub" id="screen3sub"></div>
     <div class="sort-hint" id="sortHint"></div>
+    <div class="day-save-panel" id="daySavePanel" style="display:none">
+      <div class="day-save-title">📌 入力順を曜日別に保存</div>
+      <div class="day-save-sub">緑✓がついた順番が自動で記録されます。保存したい曜日ボタンを押してください（✓＝保存済み）。</div>
+      <div class="day-save-buttons" id="daySaveButtons"></div>
+    </div>
     <div id="propertyList"></div>
     <div style="display:flex;gap:10px;margin-top:8px">
       <button class="btn btn-success" style="flex:1" onclick="exportText()">📄 TEXT保存</button>
@@ -661,6 +682,7 @@ function getSortedProps(){
 function renderPropertyList(){
   const c=document.getElementById('propertyList'); c.innerHTML='';
   const hint=document.getElementById('sortHint');
+  renderDaySaveButtons();
 
   let displayList;
   if(state.customOrder){
@@ -901,12 +923,35 @@ function clearPropertyData(){
 }
 
 // ===== SAVE ORDER =====
-function saveCurrentOrder(){
+function saveCurrentOrder(day){
+  if(!state.selectedStaff){alert('担当者が選択されていません');return;}
+  day = day || state.dayName;
   const base=getSortedProps();
   const ordered=[...state.entryOrder,...base.filter(p=>!state.entryOrder.includes(p.name)).map(p=>p.name)];
-  setSavedOrder(state.selectedStaff,state.dayName,ordered);
-  document.getElementById('saveOrderBanner').style.display='none';
-  alert(`${state.selectedStaff}（${state.dayName}曜日）の入力順を保存しました。`);
+  setSavedOrder(state.selectedStaff,day,ordered);
+  const banner=document.getElementById('saveOrderBanner');
+  if(banner) banner.style.display='none';
+  renderDaySaveButtons();
+  alert(`${state.selectedStaff}（${day}曜日）の入力順を保存しました。`);
+}
+
+function renderDaySaveButtons(){
+  const panel=document.getElementById('daySavePanel');
+  const c=document.getElementById('daySaveButtons');
+  if(!panel||!c) return;
+  if(!state.selectedStaff){ panel.style.display='none'; return; }
+  panel.style.display='block';
+  c.innerHTML='';
+  ORDERED_DAYS.forEach(d=>{
+    const btn=document.createElement('button');
+    const isToday=d===state.dayName;
+    const saved=!!getSavedOrder(state.selectedStaff,d);
+    btn.className='day-save-btn'+(isToday?' today':'')+(saved?' saved':'');
+    btn.textContent=d;
+    btn.title=(saved?'保存済み・':'')+d+'曜日に保存';
+    btn.onclick=()=>saveCurrentOrder(d);
+    c.appendChild(btn);
+  });
 }
 
 // ===== SCREEN 3→5 =====
