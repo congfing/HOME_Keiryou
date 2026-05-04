@@ -437,7 +437,7 @@ const DEFAULT_PROPERTIES = [
   // ── 古本市場・サイリス ──
   { name:'古本市場 上野店',           order:32, days:[], fields:[{label:'可燃',unit:'袋'},{label:'可燃',unit:'kg'},{label:'古紙',unit:'kg'},{label:'資源',unit:'袋'},{label:'資源',unit:'kg'}] },
   // ── 旧上野庁舎（SAKAKURABASE） ──
-  { name:'旧上野庁舎 SAKAKURA BASE',         order:33, days:[], fields:[{label:'ホテル可燃',unit:'kg'},{label:'ホテル不燃',unit:'kg'},{label:'図書館可燃',unit:'kg'},{label:'図書館不燃',unit:'kg'},{label:'カフェ可燃',unit:'kg'},{label:'カフェ不燃',unit:'kg'}] },
+  { name:'旧上野庁舎 SAKAKURA BASE',         order:33, days:[], fields:[{label:'ホテル可燃',unit:'kg'},{label:'ホテル不燃',unit:'kg'},{label:'図書館可燃',unit:'kg'},{label:'図書館不燃',unit:'kg'},{label:'カフェ可燃',unit:'kg'},{label:'カフェ不燃',unit:'kg'},{label:'白袋',unit:'袋'},{label:'青袋',unit:'袋'},{label:'黒袋',unit:'袋'}] },
   // ── 魚民 ──
   { name:'魚民 上野市駅前店',               order:34, days:[], fields:[{label:'生ごみ',unit:'kg'},{label:'紙',unit:'kg'},{label:'不燃ビニ',unit:'kg'},{label:'カン',unit:'kg'},{label:'ビン',unit:'kg'},{label:'段ボール',unit:'kg'},{label:'割れ物',unit:'kg'},{label:'発泡',unit:'kg'}] },
   // ── 厚板プレス工業 ──
@@ -470,6 +470,10 @@ const DEFAULT_PROPERTIES = [
   ]},
   // ── コメリ ──
   { name:'コメリ ＨＣ上野店', order:44, days:[], fields:[{label:'可燃物',unit:'袋'},{label:'可燃物',unit:'kg'},{label:'不燃物１(ビン缶PET)',unit:'袋'},{label:'不燃物１(ビン缶PET)',unit:'kg'},{label:'不燃物２(容器包装系)',unit:'袋'},{label:'不燃物２(容器包装系)',unit:'kg'},{label:'粗大ごみ/その他',unit:'袋'},{label:'粗大ごみ/その他',unit:'kg'}] },
+  // ── 検察庁 ──
+  { name:'検察庁', order:45, days:[], fields:[
+    {label:'可燃物',unit:'kg'},{label:'不燃物',unit:'kg'},{label:'古紙',unit:'kg'}
+  ]},
 ];
 const DEFAULT_STAFF = ['担当者A','担当者B'];
 
@@ -1657,7 +1661,7 @@ function getMailTo(){
 
 // ===== RESET PROPERTIES TO DEFAULT =====
 function resetPropertiesToDefault(){
-  if(!confirm('物件リストをデフォルト（40件）に戻しますか？\n追加・変更した物件情報はすべて消えます。')) return;
+  if(!confirm('物件リストをデフォルト（45件）に戻しますか？\n追加・変更した物件情報はすべて消えます。')) return;
   localStorage.removeItem(LS_PROPERTIES);
   allProperties = JSON.parse(JSON.stringify(DEFAULT_PROPERTIES));
   saveJSON(LS_PROPERTIES, allProperties);
