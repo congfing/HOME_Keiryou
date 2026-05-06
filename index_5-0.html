@@ -233,7 +233,7 @@
     <button class="back-btn" onclick="history.back()">← 戻る</button>
     <h1>計量物件表　記入箇所メモ</h1>
   </div>
-  <div class="sub">v5-0　／　全43物件（31ファイル）　／　更新日: 2026年5月5日</div>
+  <div class="sub">v5-0　／　全44物件（32ファイル）　／　更新日: 2026年5月6日</div>
 </header>
 
 <main>
@@ -779,6 +779,20 @@ const properties = [
     ],
     rows: "2行目以降（収集日のみ、A列に日付記入）",
     notes: ["C・E・G列は小計（自動）"]
+  },
+  {
+    no: 44, name: "法務局",
+    file: "法務局.xlsx",
+    fileNote: "",
+    mark: "①",
+    header: "ヘッダー行1: 日付 / 曜日 / シュレッダー / 小計 / 古紙kg / 小計 / 小計 / 不燃ごみ / 小計",
+    cols: [
+      "C列（シュレッダー）",
+      "E列（古紙kg）",
+      "H列（不燃ごみ）"
+    ],
+    rows: "2〜32行目（1日〜31日）",
+    notes: ["D・F・G・I列は小計（自動）"]
   }
 ];
 
