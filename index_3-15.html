@@ -421,7 +421,7 @@ const DEFAULT_PROPERTIES = [
   // ── コカ・コーラボトラーズ ──
   { name:'コカ・コーラボトラーズ',       order:27, days:[], fields:[{label:'収集',unit:'袋'}] },
   // ── チョーヤ梅酒 ──
-  { name:'チョーヤ梅酒',       order:28, days:[], fields:[{label:'可燃',unit:'㎥'},{label:'可燃',unit:'kg'},{label:'第2収集',unit:'㎥'},{label:'第2収集',unit:'kg'}] },
+  { name:'チョーヤ梅酒',       order:28, days:[], fields:[{label:'可燃㎥',unit:'㎥'},{label:'可燃',unit:'kg'},{label:'第2収集㎥',unit:'㎥'},{label:'第2収集',unit:'kg'}] },
   // ── マックスバリュ ──
   { name:'マックスバリュ 佐那具店',order:29, days:[], fields:[{label:'可燃',unit:'kg'},{label:'生ごみ',unit:'kg'},{label:'カン',unit:'kg'},{label:'ビン',unit:'kg'},{label:'われもの',unit:'kg'},{label:'アラ',unit:'kg'}] },
   { name:'マックスバリュ 上野店',  order:30, days:[], fields:[{label:'可燃',unit:'kg'},{label:'生ごみ',unit:'kg'},{label:'カン',unit:'kg'},{label:'ビン',unit:'kg'},{label:'アラ',unit:'kg'},{label:'段ボール',unit:'kg'},{label:'アルミ缶',unit:'kg'},{label:'ペットボトル',unit:'kg'},{label:'牛乳パック',unit:'kg'},{label:'発泡スチロール',unit:'kg'}] },
@@ -869,7 +869,7 @@ function openEntry(idx,event){
     }
     div.innerHTML=`<div class="field-label">${field.label}<span class="field-unit">（${field.unit}）</span></div>
       ${hint}
-      <input type="number" class="num-input" inputmode="decimal" min="0" step="0.1"
+      <input type="number" class="num-input" inputmode="decimal" min="0" step="any"
         id="ef_${field.label}" placeholder="0" value="${existing[field.label]!==undefined?existing[field.label]:''}">`;
     c.appendChild(div);
   });
